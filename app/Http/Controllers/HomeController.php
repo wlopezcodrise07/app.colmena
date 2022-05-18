@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $data = [
+        'title' => 'Home',
+        'js' => 'home'
+      ];
+        return view('home',$data);
     }
 }

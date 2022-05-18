@@ -7,9 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Home - {{ config('app.name') }}</title>
+        <title>@yield('title') - {{ config('app.name') }}</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <!-- SweetAlert -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+        <link rel="icon" type="image/x-icon" href="{{asset('img/colmena_logo_corto.png')}}" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -131,7 +136,6 @@
                         </h6>
                         <!-- Example Message 1  -->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="assets/img/illustrations/profiles/profile-2.png" />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
@@ -139,7 +143,6 @@
                         </a>
                         <!-- Example Message 2-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="assets/img/illustrations/profiles/profile-3.png" />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Emily Fowler · 2d</div>
@@ -147,7 +150,6 @@
                         </a>
                         <!-- Example Message 3-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="assets/img/illustrations/profiles/profile-4.png" />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Marshall Rosencrantz · 3d</div>
@@ -155,7 +157,6 @@
                         </a>
                         <!-- Example Message 4-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="assets/img/illustrations/profiles/profile-5.png" />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Colby Newton · 3d</div>
@@ -167,25 +168,25 @@
                 </li>
                 <!-- User Dropdown-->
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="{{asset('img/colmena_logo_corto.png')}}" /></a>
                     <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                         <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
+                            <img class="dropdown-user-img" src="{{asset('img/colmena_logo_corto.png')}}" />
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-details-name">{{ Auth::user()->nombre.' '.Auth::user()->apepat.' '.Auth::user()->apemat }}</div>
                                 <div class="dropdown-user-details-email">{{Auth::user()->email}}</div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="{{route('mantenimiento.usuario.index')}}">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                            Account
+                            Actualizar información de Usuario
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                            Logout
+                            Cerrar Sesión
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
@@ -198,17 +199,7 @@
           @include('layouts.aside')
 
             <div id="layoutSidenav_content">
-                <main>
-                    <header class="py-10 mb-4 bg-gradient-primary-to-secondary">
-                        <div class="container-xl px-4">
-                            <div class="text-center">
-                                <h1 class="text-white">Welcome to SB Admin Pro</h1>
-                                <p class="lead mb-0 text-white-50">A professionally designed admin panel template built with Bootstrap 5</p>
-                            </div>
-                        </div>
-                    </header>
-
-                </main>
+                @yield('content')
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
@@ -222,6 +213,34 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- SweetAlert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+        <!-- DataTables -->
+
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+
+        <!-- SummerNote -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+        <!-- DataTable Export -->
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/fdf9de8f5b.js" crossorigin="anonymous"></script>
+
         <script src="{{asset('js/scripts.js')}}"></script>
+        <script type="text/javascript">
+          const baseurl = '{{ url('') }}';
+          const asset = '{{ asset('') }}';
+        </script>
+        <script src="{{asset('js/app/')}}/@yield('js').js"></script>
     </body>
 </html>

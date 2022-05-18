@@ -8,11 +8,14 @@
         <meta name="author" content="" />
         <title>Ingreso - {{ config('app.name') }}</title>
         <link href="{{ asset('css/styles.css')}} " rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="{{asset('img/colmena_logo_corto.png')}}" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+        <style media="screen">
+
+          </style>
     </head>
-    <body class="bg-primary">
+    <body class="bg-secondary">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -20,7 +23,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-5">
             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header justify-content-center">{{ __('Ingreso') }}</div>
+                <div class="card-header justify-content-center text-secondary">{{ __('Ingreso') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -30,9 +33,9 @@
                             <label for="usuario" class="col-md-4 col-form-label text-md-end">{{ __('Usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario" autofocus>
+                                <input id="email" type="text" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario" autofocus>
 
-                                @error('email')
+                                @error('usuario')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -68,12 +71,12 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-secondary">
                                     {{ __('Ingresar') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link text-secondary" href="{{ route('password.request') }}">
                                         {{ __('¿Olvidaste tu clave?') }}
                                     </a>
                                 @endif

@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'apepat' => $data['apepat'],
             'apemat' => $data['apemat'],
             'documento' => $data['documento'],
-            'usuario' => $data['documento'],
+            'usuario' => $data['email'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

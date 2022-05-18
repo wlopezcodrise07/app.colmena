@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * The controller namespace for the application.
@@ -33,21 +34,52 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        $this->configureRateLimiting();
+     public function boot()
+     {
+       parent::boot();
+         /*$this->configureRateLimiting();
+         $this->routes(function () {
+             Route::prefix('api')
+                 ->middleware('api')
+                 ->namespace($this->namespace)
+                 ->group(base_path('routes/api.php'));
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+             Route::middleware('web')
+                 ->namespace($this->namespace)
+                 ->group(base_path('routes/web.php'));
+         });*/
+     }
+     public function map()
+     {
+         $this->mapApiRoutes();
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-        });
-    }
+         $this->mapWebRoutes();
+
+         //
+     }
+     /**
+      * Configure the rate limiters for the application.
+      *
+      * @return void
+      */
+
+      protected function mapWebRoutes()
+      {
+          Route::group([
+              'middleware' => 'web',
+              'namespace' => $this->namespace,
+          ], function ($router) {
+              require base_path('routes/web.php');
+              require base_path('routes/web_routes/mantenimiento.php');
+          });
+      }
+      protected function mapApiRoutes()
+      {
+          Route::prefix('api')
+              ->middleware('api')
+              ->namespace($this->namespace)
+              ->group(base_path('routes/api.php'));
+      }
 
     /**
      * Configure the rate limiters for the application.

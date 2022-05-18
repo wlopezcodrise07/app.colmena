@@ -41,9 +41,9 @@ class LoginController extends Controller
     }
 
     public function login(){
-   $document_number = request('usuario');
+   $usuario = request('usuario');
    $password = request('password');
-   $user= User::where('usuario',$document_number)->first();
+   $user= User::where('usuario',$usuario)->first();
    if( $user ){//El usuario ingresado existe
      if( $user->activo == 1 ){ //Si active es igual a 1
        $credentials = $this->validate(request(),[
