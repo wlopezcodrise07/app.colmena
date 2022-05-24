@@ -30,6 +30,7 @@ function loadData(){
             }
 
           }},
+          {data:'usuario'},
           {data:null,render:function(data){
             return         `<button type="button" class="btn btn-primary btn-sm btn-editar" name="button" data-id="${data.id}"><i class="fa fa-edit"></i> </button>
               <button type="button" class="btn btn-danger btn-sm btn-eliminar" name="button" data-id="${data.id}"><i class="fa fa-trash"></i> </button>`

@@ -45,6 +45,7 @@
                           <th>Código</th>
                           <th>Descripción</th>
                           <th>Tipo</th>
+                          <th>Actualizado por</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -70,6 +71,12 @@
                     @csrf
                     <div class="row">
                       <div class="col-md-12">
+                        <label for="">Código</label>
+                        <input type="text" class="form-control" name="codigo" value="" max="100" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
                         <label for="">Descripción</label>
                         <input type="hidden" class="form-control" name="id" value="" max="20" required>
                         <input type="text" class="form-control" name="descripcion" value="" max="100" required>
@@ -78,7 +85,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <label for="">Tipo</label>
-                        <select class="form-control" name="estado">
+                        <select class="form-control" name="tipo">
                           <option value="1">Influencer</option>
                           <option value="2">Servicio</option>
                         </select>

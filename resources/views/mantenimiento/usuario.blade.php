@@ -28,7 +28,7 @@
     <!-- Main page content-->
     <div class="container-xl px-4 mt-n10">
         <div class="card">
-            <div class="card-header text-secondary">Actualización de Datos<div class="float-end"><button class="btn btn-sm  btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#changePassModal" type="button"><i class="fa-solid fa-lock"></i>Actualizar Clave</button> </div></div>
+            <div class="card-header text-secondary">Actualización de Datos<div class="float-end"><button class="btn btn-sm  btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#changePassModal" type="button"><i class="fas fa-lock"></i> &nbsp;Actualizar Clave</button> </div></div>
             <div class="card-body">
               <form id="formUsuario">
                   @csrf

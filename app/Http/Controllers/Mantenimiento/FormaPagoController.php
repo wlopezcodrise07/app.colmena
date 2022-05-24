@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mantenimiento;
 use App\Http\Controllers\Controller;
 use App\Models\FormaPago;
 use Illuminate\Http\Request;
+use Auth;
 
 class FormaPagoController extends Controller
 {
@@ -31,9 +32,12 @@ class FormaPagoController extends Controller
     public function store(Request $request)
     {
         try {
+          $user = Auth::user();
+          
           $data = [
             "descripcion" => $request->descripcion,
             "estado" => $request->estado,
+            "usuario" => $user->nombre.' '.$user->apepat.' '.$user->apemat,
           ];
           FormaPago::updateOrCreate([
             'id' => $request->id

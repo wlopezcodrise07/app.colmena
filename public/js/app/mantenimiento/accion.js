@@ -29,6 +29,7 @@ function loadData(){
               `;
             }
           }},
+          {data:'usuario'},
           {data:null,render:function(data){
             if (data.estado==1) {
               return `

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClientesController extends Controller
 {
@@ -54,32 +55,33 @@ class ClientesController extends Controller
               'CCODCLI' => ['required', 'string', 'min:1','max:20','unique:maecli'],
               'CNUMRUC' => ['required', 'string', 'min:8','max:20','unique:maecli'],
           ], [
-            'CCODCLI.required'=> 'El campo CÓDIGO no puede estar vacio',
-            'CCODCLI.unique'=> 'el valor CÓDIGO registrado ya está asignado a otro cliente',
+            'CCODCLI.required'=> 'El campo CODIGO no puede estar vacio',
+            'CCODCLI.unique'=> 'el valor CODIGO registrado ya esta asignado a otro cliente',
             'CNUMRUC.required'=> 'El campo RUC no puede estar vacio',
-            'CNUMRUC.unique'=> 'el RUC CÓDIGO registrado ya está asignado a otro cliente',
+            'CNUMRUC.unique'=> 'el RUC registrado ya esta asignado a otro cliente',
           ]);
-
+          $mensaje = ($validator->errors());
           if (IS_NULL($request->id)) {
             if ($validator->fails()) {
               $mensaje = json_decode($validator->errors());
-              if ($mensaje->CCODCLI) {
+              if (isset($mensaje->CCODCLI)) {
                 return [
                     'title' => 'Alerta',
-                    'text'  => 'CODIGO CLIENTE : '.$mensaje->CCODCLI,
+                    'text'  => 'CODIGO CLIENTE : '.json_encode($mensaje->CCODCLI),
                     'type'  => 'warning'
                   ];
               }
-              if ($mensaje->CNUMRUC) {
+              if (isset($mensaje->CNUMRUC)) {
                 return [
                     'title' => 'Alerta',
-                    'text'  => 'RUC CLIENTE : '.$mensaje->CNUMRUC,
+                    'text'  => 'RUC CLIENTE : '.json_encode($mensaje->CNUMRUC),
                     'type'  => 'warning'
                   ];
               }
 
             }
           }
+          $user = Auth::user();
 
           $data = [
             "CCODCLI" => $request->CCODCLI,
@@ -92,6 +94,9 @@ class ClientesController extends Controller
             "DIRINSTAGRAM" => $request->DIRINSTAGRAM,
             "DIRTIKTOK" => $request->DIRTIKTOK,
             "active" => $request->active,
+            "tipo" => $request->tipo,
+            "codigo_asignado" => (isset($request->codigo_asignado)) ? 1 : 0 ,
+            "usuario" => $user->nombre.' '.$user->apepat.' '.$user->apemat,
           ];
           Cliente::updateOrCreate([
             'id' => $request->id
@@ -168,5 +173,13 @@ class ClientesController extends Controller
           'type' => 'error'
         ];
       }
+    }
+
+    public function getCodigo(Request $request)
+    {
+      $codigo = Cliente::where('codigo_asignado',1)->orderBy('CCODCLI','desc')->value('CCODCLI');
+      $codigo_asignado = (isset($codigo)) ? (ltrim($codigo, '0') + 1) : 1 ;
+
+      return str_pad($codigo_asignado,10,"0",STR_PAD_LEFT);
     }
 }

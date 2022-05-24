@@ -42,10 +42,14 @@ class ProductoClienteController extends Controller
     public function store(Request $request)
     {
       try {
+        $user = Auth::user();
+        
           $data = [
             "producto" => mb_strtoupper($request->producto,'UTF-8'),
             "cliente" => $request->cliente,
+            "contacto" => mb_strtoupper($request->contacto,'UTF-8'),
             "estado" => $request->estado,
+            "usuario" => $user->nombre.' '.$user->apepat.' '.$user->apemat,
           ];
           if (IS_NULL($request->id)) {
             DB::table('productos_cliente')->insert($data);
@@ -97,19 +101,20 @@ class ProductoClienteController extends Controller
     public function get_campana(Request $request){
 
       $data = DB::table('cronograma_producto')->selectRaw("
+      id,
         case
-        WHEN month(periodo)=1 THEN 'ENERO '+YEAR(periodo)
-        WHEN month(periodo)=2 THEN 'FEBRERO '+YEAR(periodo)
-        WHEN month(periodo)=3 THEN 'MARZO '+YEAR(periodo)
-        WHEN month(periodo)=4 THEN 'ABRIL '+YEAR(periodo)
-        WHEN month(periodo)=5 THEN 'MAYO '+YEAR(periodo)
-        WHEN month(periodo)=6 THEN 'JUNIO '+YEAR(periodo)
-        WHEN month(periodo)=7 THEN 'JULIO '+YEAR(periodo)
-        WHEN month(periodo)=8 THEN 'AGOSTO '+YEAR(periodo)
-        WHEN month(periodo)=9 THEN 'SEPTIEMBRE '+YEAR(periodo)
-        WHEN month(periodo)=10 THEN 'OCTUBRE '+YEAR(periodo)
-        WHEN month(periodo)=11 THEN 'NOVIEMBRE '+YEAR(periodo)
-        WHEN month(periodo)=12 THEN 'DICIEMBRE '+YEAR(periodo) END periodo,
+        WHEN month(periodo)=1 THEN CONCAT('ENERO ',YEAR(periodo))
+        WHEN month(periodo)=2 THEN CONCAT('FEBRERO ',YEAR(periodo))
+        WHEN month(periodo)=3 THEN CONCAT('MARZO ',YEAR(periodo))
+        WHEN month(periodo)=4 THEN CONCAT('ABRIL ',YEAR(periodo))
+        WHEN month(periodo)=5 THEN CONCAT('MAYO ',YEAR(periodo))
+        WHEN month(periodo)=6 THEN CONCAT('JUNIO ',YEAR(periodo))
+        WHEN month(periodo)=7 THEN CONCAT('JULIO ',YEAR(periodo))
+        WHEN month(periodo)=8 THEN CONCAT('AGOSTO ',YEAR(periodo))
+        WHEN month(periodo)=9 THEN CONCAT('SEPTIEMBRE ',YEAR(periodo))
+        WHEN month(periodo)=10 THEN CONCAT('OCTUBRE ',YEAR(periodo))
+        WHEN month(periodo)=11 THEN CONCAT('NOVIEMBRE ',YEAR(periodo))
+        WHEN month(periodo)=12 THEN CONCAT('DICIEMBRE ',YEAR(periodo)) END periodo,
         case
         WHEN DATEDIFF(periodo,NOW())>7 then '2'
         WHEN DATEDIFF(periodo,NOW())<=7 or DATEDIFF(periodo,NOW())>0  then '1'
@@ -143,6 +148,26 @@ class ProductoClienteController extends Controller
             'error' => null,
             'type' => 'success'
           ];
+      } catch (\Exception $e) {
+        return [
+          'title' => 'Alerta',
+          'text' => 'Hubo un error',
+          'error' => $e->getMessage(),
+          'type' => 'error'
+        ];
+      }
+    }
+
+    public function destroyCampaña(Request $request)
+    {
+      try {
+        DB::table('cronograma_producto')->where('id',$request->id)->delete();
+        return [
+          'title' => 'Buen Trabajo',
+          'text' =>  'Se eliminó la campaña del producto',
+          'error' => null,
+          'type' => 'success'
+        ];
       } catch (\Exception $e) {
         return [
           'title' => 'Alerta',

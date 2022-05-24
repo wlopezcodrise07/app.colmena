@@ -71,6 +71,7 @@ class RouteServiceProvider extends ServiceProvider
           ], function ($router) {
               require base_path('routes/web.php');
               require base_path('routes/web_routes/mantenimiento.php');
+              require base_path('routes/web_routes/procesos.php');
           });
       }
       protected function mapApiRoutes()

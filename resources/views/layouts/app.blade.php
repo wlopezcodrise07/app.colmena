@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-    </head>
+        <link rel="stylesheet" href="{{asset('assets/selectize/selectize.default.css')}}" >
+  </head>
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
             <!-- Sidenav Toggle Button-->
@@ -26,7 +27,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">{{ config('app.name') }}</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{{ route('home') }}">{{ config('app.name') }}</a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
             <form class="form-inline me-auto d-none d-lg-block me-3">
@@ -38,7 +39,7 @@
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- Documentation Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-md-block me-3">
+                <!-- <li class="nav-item dropdown no-caret d-none d-md-block me-3">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="fw-500">Documentation</div>
                         <i class="fas fa-chevron-right dropdown-arrow"></i>
@@ -68,7 +69,7 @@
                             </div>
                         </a>
                     </div>
-                </li>
+                </li> -->
                 <!-- Navbar Search Dropdown-->
                 <!-- * * Note: * * Visible only below the lg breakpoint-->
                 <li class="nav-item dropdown no-caret me-3 d-lg-none">
@@ -233,13 +234,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+        <script src="{{asset('assets/selectize/selectize.js')}}"></script>
 
         <script src="https://kit.fontawesome.com/fdf9de8f5b.js" crossorigin="anonymous"></script>
-
         <script src="{{asset('js/scripts.js')}}"></script>
         <script type="text/javascript">
           const baseurl = '{{ url('') }}';
           const asset = '{{ asset('') }}';
+          const activate_tooltip = () => {
+            $('[data-bs-toggle="tooltip"]').tooltip()
+        }
         </script>
         <script src="{{asset('js/app/')}}/@yield('js').js"></script>
     </body>

@@ -44,6 +44,8 @@
                         <tr>
                           <th>Producto</th>
                           <th>Cliente</th>
+                          <th>Contacto</th>
+                          <th>Actualizado por</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -76,7 +78,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <label for="">CLIENTE</label>
-                        <select class="form-control" name="cliente">
+                        <select class="form-control" name="cliente" required>
                           <option value="">Seleccione</option>
                           @foreach ($clientes as $key)
                             <option value="{{$key->CCODCLI}}">{{$key->CNOMCLI}}</option>
@@ -84,11 +86,16 @@
                         </select>
                       </div>
                     </div>
-
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label for="">CONTACTO</label>
+                        <input type="text" class="form-control" name="contacto" value="" max="250">
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-md-12">
                         <label for="">ESTADO</label>
-                        <select class="form-control" name="estado">
+                        <select class="form-control" name="estado" required>
                           <option value="1">Activado</option>
                           <option value="0">Desactivado</option>
                         </select>

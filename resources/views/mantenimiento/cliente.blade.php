@@ -51,6 +51,7 @@
                           <th>Tik Tok</th>
                           <th>Twitter</th>
                           <th>Facebook</th>
+                          <th>Actualizado por</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
@@ -74,32 +75,42 @@
                 <div class="row ">
                     @csrf
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">CÓDIGO</label>
                         <input type="text" class="form-control" name="CCODCLI" value="" max="20" required>
                         <input type="hidden" class="form-control" name="id" value="" max="20" required>
+                        <input type="checkbox" class="form-check-input ckb_codigo" name="codigo_asignado" id="codigo_asignado" value=""><label class="ckb_codigo" for="codigo_asignado">¿Asignar Código?</label>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
+                        <label>TIPO DE CLIENTE</label>
+                        <select class="form-control" name="tipo" required>
+                          <option value="NAT">NATURAL</option>
+                          <option value="JUR">JURIDICA</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mb-3">
                         <label for="">RAZON SOCIAL/NOMBRE</label>
                         <input type="text" class="form-control" name="CNOMCLI" value="" max="100" required>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">RUC</label>
                         <input type="text" class="form-control" name="CNUMRUC" value="" max="20" required>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">DIRECCIÓN</label>
                         <input type="text" class="form-control" name="CDIRCLI" value="" max="300" required>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">TELÉFONO</label>
                         <div class="input-group ">
                           <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
@@ -108,7 +119,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">FACEBOOK</label>
                         <div class="input-group ">
                           <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
@@ -117,7 +128,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">TWITTER</label>
                         <div class="input-group ">
                           <span class="input-group-text"><i class="fab fa-twitter"></i></span>
@@ -126,7 +137,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">INSTAGRAM</label>
                         <div class="input-group ">
                           <span class="input-group-text"><i class="fab fa-instagram"></i></span>
@@ -135,7 +146,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">TIKTOK</label>
                         <div class="input-group ">
                           <span class="input-group-text"><i class="fab fa-tiktok"></i></span>
@@ -144,7 +155,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <label for="">ESTADO</label>
                         <select class="form-control" name="active">
                           <option value="1">Activado</option>

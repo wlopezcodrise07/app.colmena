@@ -34,9 +34,22 @@
                         <a class="nav-link" href="{{route('mantenimiento.forma_pago.index')}}">Formas de Pago</a>
                         <a class="nav-link" href="{{route('mantenimiento.accion.index')}}">Acciones</a>
                         <a class="nav-link" href="{{route('mantenimiento.influencer.index')}}">Influencers</a>
+                        <a class="nav-link" href="{{route('mantenimiento.categoria_redsocial.index')}}">Categorias de Red Social</a>
                     </nav>
                 </div>
-
+                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseProceso" aria-expanded="false" aria-controls="collapseProceso">
+                    <div class="nav-link-icon"><i class="fas fa-tools"></i></div>
+                    Procesos
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseProceso" data-bs-parent="#accordionSidenav">
+                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                        <a class="nav-link" href="{{route('procesos.cotizaciones.index')}}">Cotizaciones</a>
+                        <a class="nav-link" href="{{route('procesos.cotizaciones.mantenimiento')}}">Editar Cotizaciones</a>
+                        <a class="nav-link" href="{{route('procesos.cotizaciones.versionar')}}">Versionar Cotizaciones</a>
+                        <a class="nav-link" href="{{route('procesos.programaciones.index')}}">Programaciones</a>
+                    </nav>
+                </div>
 
             </div>
         </div>

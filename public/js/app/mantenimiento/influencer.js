@@ -23,13 +23,16 @@ function loadData(){
           {data:null,render:function(data){
             string = '';
 
-            categoriesSelecteds = data.categorias.split(',');
-            if (categoriesSelecteds.length>0) {
-              categoriesSelecteds.forEach(element => string = string + (categoriasArray.filter(word => word.id==element)[0].descripcion)  + ',');
-            }
+            if (data.categorias!=null) {
+              categoriesSelecteds = data.categorias.split(',');
+              if (categoriesSelecteds.length>0) {
+                categoriesSelecteds.forEach(element => string = string + (categoriasArray.filter(word => word.id==element)[0].descripcion)  + ',');
+              }
 
+            }
             return string;
           }},
+          {data:'usuario'},
           {data:null,render:function(data){
             return `
             <button type="button" class="btn btn-info btn-sm btn-editar" name="button" data-id="${data.influencer_codigo}">datos</button>
@@ -184,6 +187,7 @@ $(document).on('click','.btn-eliminar',function(e){
       const array = valor.split(',')
       console.log(array.length)
       if (array.length>=7 && array.length<=14 ) {
+        $(this).removeClass("border border-4 border-danger")
         prom = ArrayAvg(array);
         console.log(prom)
 
@@ -197,13 +201,13 @@ $(document).on('click','.btn-eliminar',function(e){
 
           div_pane.find('input[name=er_'+name+']').val((er*100).toFixed(2))
           if (er>=0.10) {
-            div_pane.find('input[name=er_'+name+']').addClass("border border-success")
+            div_pane.find('input[name=er_'+name+']').addClass("border border-4 border-success")
           }else {
-            div_pane.find('input[name=er_'+name+']').addClass("border border-danger")
+            div_pane.find('input[name=er_'+name+']').addClass("border border-4 border-danger")
           }
 
       }else {
-        alert('debe digital por lo menos 7 valores')
+        $(this).addClass("border border-4 border-danger")
       }
     })
   }
@@ -218,19 +222,19 @@ $(document).on('click','.btn-eliminar',function(e){
       json_total=''
       $(this).find('input').each(function(){
         json ='';
-        json = json + '"input":"'+$(this).attr('name')+'",'+'"value":"'+$(this).val()+'"'
+        json = json + '"input":"'+$(this).attr('name')+'",'+'"valor":"'+$(this).val()+'"'
         obj=('{'+json+'}');
         json_total=json_total+','+(obj);
       })
       $(this).find('select').each(function(){
         json ='';
-        json = json + '"input":"'+$(this).attr('name')+'",'+'"value":"'+$(this).val()+'"'
+        json = json + '"input":"'+$(this).attr('name')+'",'+'"valor":"'+$(this).val()+'"'
         obj=('{'+json+'}');
         json_total=json_total+','+(obj);
       })
       $(this).find('textarea').each(function(){
         json ='';
-        json = json + '"input":"'+$(this).attr('name')+'",'+'"value":"'+$(this).val()+'"'
+        json = json + '"input":"'+$(this).attr('name')+'",'+'"valor":"'+$(this).val()+'"'
         obj=('{'+json+'}');
         json_total=json_total+','+(obj);
       })

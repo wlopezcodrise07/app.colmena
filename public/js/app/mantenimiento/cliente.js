@@ -33,6 +33,7 @@ function loadData(){
           {data:null,render:function(data){
             return (data.DIRFB) ? `<center><a href="${data.DIRFB}" target="_blank"><span class="badge bg-primary">FB</span> </a></center>` : '';
           }},
+          {data:'usuario'},
           {data:null,render:function(data){
             if (data.active==1) {
               return `
@@ -45,6 +46,7 @@ function loadData(){
             }
 
           }},
+          {data:'usuario'},
           {data:null,render:function(data){
             return `<button type="button" class="btn btn-primary btn-sm btn-editar" name="button" data-id="${data.id}"><i class="fa fa-edit"></i> </button>
               <button type="button" class="btn btn-danger btn-sm btn-eliminar" name="button" data-id="${data.id}"><i class="fa fa-trash"></i> </button>`
@@ -58,9 +60,27 @@ loadData();
 
 $(document).on('click','.btnAgregarCliente',function(){
   $('.modal-title').html('Agregar Cliente')
+  $('#formCliente .ckb_codigo').show()
   $('#formCliente input[name=codigo]').attr('readonly',false)
   $('#formCliente')[0].reset();
 
+})
+$(document).on('change','input[name=codigo_asignado]',function(){
+  if( $(this).is(':checked') ) {
+    $.ajax({
+      url: baseurl + '/mantenimiento/clientes/getCodigo',
+      type: 'GET',
+      beforeSend:function(){
+        $('input[name=CCODCLI]').attr('readonly','readonly')
+      },
+      success: function(data){
+        $('input[name=CCODCLI]').val(data)
+      }
+    })
+    }else {
+      $('input[name=CCODCLI]').val('')
+      $('input[name=CCODCLI]').attr('readonly',false)
+    }
 })
 
 $(document).on('submit','#formCliente',function(e){
@@ -109,6 +129,7 @@ $(document).on('click','.btn-editar',function(e){
       console.log(data.error)
       $('#clienteModal').modal('show')
       $('#formCliente input[name=id]').val(data.id)
+      $('#formCliente .ckb_codigo').hide()
       $('#formCliente input[name=CCODCLI]').val(data.CCODCLI)
       $('#formCliente input[name=CNOMCLI]').val(data.CNOMCLI)
       $('#formCliente input[name=CNUMRUC]').val(data.CNUMRUC)
@@ -119,6 +140,7 @@ $(document).on('click','.btn-editar',function(e){
       $('#formCliente input[name=DIRINSTAGRAM]').val(data.DIRINSTAGRAM)
       $('#formCliente input[name=DIRTIKTOK]').val(data.DIRTIKTOK)
       $('#formCliente select[name=active]').val(data.active)
+      $('#formCliente select[name=tipo]').val(data.tipo)
 
     }
   })

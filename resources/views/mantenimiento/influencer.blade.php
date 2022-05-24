@@ -42,6 +42,7 @@
                           <th>Celular</th>
                           <th>Correo</th>
                           <th>Categoria</th>
+                          <th>Actualizado por</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

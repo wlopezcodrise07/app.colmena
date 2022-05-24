@@ -11,7 +11,7 @@
         <div class="container-xl px-4">
             <div class="text-center">
                 <h1 class="text-white">Bienvenido a COLMENA DIGITAL</h1>
-                <p class="lead mb-0 text-white-50">A professionally designed admin panel template built with Bootstrap 5</p>
+                <p class="lead mb-0 text-white-50">Somos una agencia especializada en influencer marketing. Amamos ser una fuente de soluciones digitales y creativas para construir conexiones duraderas con nuestros aliados estratégicos.</p>
             </div>
         </div>
     </header>
@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-md-12">
           <center>
-            <img src="{{asset('img/colmena_logo.png')}}" alt="">
+            <img src="{{asset('img/colmena_logo.png')}}" width="60%" alt="">
           </center>
         </div>
       </div>

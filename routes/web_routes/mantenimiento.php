@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('clientes/store','ClientesController@store')->name('store');
 		Route::get('clientes/edit','ClientesController@edit')->name('edit');
 		Route::get('clientes/destroy','ClientesController@destroy')->name('destroy');
+		Route::get('clientes/getCodigo','ClientesController@getCodigo')->name('getCodigo');
 	});
 
 	Route::prefix('mantenimiento')
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('producto_cliente/storeCampaña','ProductoClienteController@storeCampaña')->name('storeCampaña');
 		Route::get('producto_cliente/edit','ProductoClienteController@edit')->name('edit');
 		Route::get('producto_cliente/destroy','ProductoClienteController@destroy')->name('destroy');
+		Route::get('producto_cliente/destroyCampaña','ProductoClienteController@destroyCampaña')->name('destroyCampaña');
 	});
 
 	Route::prefix('mantenimiento')
@@ -42,6 +44,18 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('forma_pago','FormaPagoController@index')->name('index');
 		Route::post('forma_pago/store','FormaPagoController@store')->name('store');
 		Route::get('forma_pago/edit','FormaPagoController@edit')->name('edit');
+		Route::get('forma_pago/destroy','FormaPagoController@destroy')->name('destroy');
+	});
+
+	Route::prefix('mantenimiento')
+	//->middleware('permission:Usuario')//
+	->namespace('Mantenimiento')
+	->name('mantenimiento.categoria_redsocial.')
+	->group(function () {
+		Route::get('categoria_redsocial','CategoriaRedSocialController@index')->name('index');
+		Route::post('categoria_redsocial/store','CategoriaRedSocialController@store')->name('store');
+		Route::get('categoria_redsocial/edit','CategoriaRedSocialController@edit')->name('edit');
+		Route::get('categoria_redsocial/destroy','CategoriaRedSocialController@destroy')->name('destroy');
 	});
 
 	Route::prefix('mantenimiento')
@@ -54,6 +68,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('influencer/storeMetrica','influencerController@storeMetrica')->name('storeMetrica');
 		Route::get('influencer/edit','influencerController@edit')->name('edit');
 		Route::get('influencer/editMetrica','influencerController@editMetrica')->name('editMetrica');
+		Route::get('influencer/getInfoAccion','influencerController@getInfoAccion')->name('getInfoAccion');
 	});
 
 	Route::prefix('mantenimiento')

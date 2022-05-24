@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mantenimiento;
 use App\Http\Controllers\Controller;
 use App\Models\Accion;
 use Illuminate\Http\Request;
+use Auth;
 
 class AccionController extends Controller
 {
@@ -32,10 +33,12 @@ class AccionController extends Controller
     public function store(Request $request)
     {
         try {
+          $user = Auth::user();
           $data = [
             'codigo' => $request->codigo,
             "descripcion" => $request->descripcion,
             "tipo" => $request->tipo,
+            "usuario" => $user->nombre.' '.$user->apepat.' '.$user->apemat,
             "estado" => $request->estado,
           ];
           Accion::updateOrCreate([
