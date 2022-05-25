@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RedSocial extends Model
 {
-    use HasFactory;
+  protected $table      = "redes_sociales";
+  protected $guarded    = ['id'];
 }

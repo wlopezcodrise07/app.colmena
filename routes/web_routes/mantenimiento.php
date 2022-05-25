@@ -50,6 +50,16 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::prefix('mantenimiento')
 	//->middleware('permission:Usuario')//
 	->namespace('Mantenimiento')
+	->name('mantenimiento.redsocial.')
+	->group(function () {
+		Route::get('redsocial','RedSocialController@index')->name('index');
+		Route::post('redsocial/store','RedSocialController@store')->name('store');
+		Route::get('redsocial/edit','RedSocialController@edit')->name('edit');
+	});
+
+	Route::prefix('mantenimiento')
+	//->middleware('permission:Usuario')//
+	->namespace('Mantenimiento')
 	->name('mantenimiento.categoria_redsocial.')
 	->group(function () {
 		Route::get('categoria_redsocial','CategoriaRedSocialController@index')->name('index');

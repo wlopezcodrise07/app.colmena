@@ -115,7 +115,7 @@
                       <?php foreach ($productos as $key): ?>
                         <div class="card detailProduct" id="producto_{{$key->CDPRODUCTO}}">
                           <div class="card-header">
-                            <input type="hidden" name="idproducto" value"{{$key->CDPRODUCTO}}">
+                            <input type="hidden" name="idproducto" value="{{$key->CDPRODUCTO}}">
                             <label class="h2 text-dark">{{$key->producto}}</label>
                             <div class="float-end">
                               <button class="btn btn-sm  btn-primary btn-addaccion" data-idproducto="{{$key->CDPRODUCTO}}" data-bs-toggle="modal" data-bs-target="#addAccionModal" type="button">
@@ -163,7 +163,9 @@
                                       <td width="10%">{{$key1->CDTOTVEN}}</td>
                                       <td style="display:none">{{$key1->CDREDSOCIAL}}</td>
                                       <td style="display:none">{{$key1->CDINPUT}}</td>
-
+                                      <td>
+                                        <button type="button" class="btn btn-danger btn-sm btn-eliminar-detalle" name="button"><i class="fa fa-trash"></i></button>
+                                      </td>
                                     </tr>
                                     <?php $item++; ?>
                                   <?php endif; ?>
@@ -255,6 +257,21 @@
             <button class="btn btn-primary" id="btnDetail" type="button">Agregar</button>
           </div>
         </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="MetricasInfluencerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="divMetricas">
+
+          </div>
+        </div>
     </div>
   </div>
 </div>
@@ -627,7 +644,9 @@ $(document).on('click','#btnDetail',function(e){
         <td width="10%">${item.precio}</td>
         <td style="display:none">${item.red_social.replace(" ","_").toLowerCase()}</td>
         <td style="display:none">${item.descripcion.replace(" ","_").toLowerCase()}</td>
-
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-eliminar-detalle" name="button"><i class="fa fa-trash"></i></button>
+        </td>
       </tr>
       `)
     tbody.find('tr[data-id='+(valor_tr+1)+']').find('select').val(item.moneda)
@@ -635,6 +654,9 @@ $(document).on('click','#btnDetail',function(e){
   sumarPrecios()
 })
 
+$(document).on('click','.btn-eliminar-detalle',function(){
+  $(this).parents('tr').remove()
+})
 $(document).on('click','.btn-removeaccion',function(){
   console.log("eliminar")
   var producto = $(this).data('idproducto')
@@ -694,4 +716,19 @@ $('#divTotales').hover(function(){
   })
 
 
+
+  $(document).on('click','.btnMetricasInfluencer',function(){
+  $.ajax({
+    url: baseurl + '/procesos/cotizacion/getMetrica',
+    type: 'get',
+    data: {influencer:$('#tipoAccionSeleccionada').val()},
+    beforeSend: function(){
+      $('#divMetricas').html('<center><img  src="'+asset+'/img/loader.gif'+'"></center>')
+    },
+    success: function(data){
+      $('#MetricasInfluencerModal').modal('show')
+      $('#divMetricas').html(data)
+    }
+  })
+  })
 </script>

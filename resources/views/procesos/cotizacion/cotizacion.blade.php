@@ -90,7 +90,9 @@
             </div>
           </div>
         </div>
-
+        <div class="">
+          input
+        </div>
           <div class="card">
               <div class="card-header text-secondary">Cotización # {{str_pad($correlativo,7,"0",STR_PAD_LEFT)}}</div>
               <div class="card-body">
@@ -175,7 +177,7 @@
       </div>
     </div>
     <div class="modal fade" id="addAccionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle"></h5>
@@ -218,6 +220,21 @@
                 <button class="btn btn-primary" id="btnDetail" type="button">Agregar</button>
               </div>
             </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="MetricasInfluencerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="divMetricas">
+
+              </div>
+            </div>
         </div>
       </div>
     </div>

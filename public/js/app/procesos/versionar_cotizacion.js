@@ -46,7 +46,33 @@ function loadData(periodo){
         ]
     });
 }
-
+function loadVersions(cotizacion){
+    $('#tblVersions').DataTable({
+        language:{
+         url: asset + "/js/spanish.json"
+        },
+        order:[[0,'asc']],
+        destroy:true,
+        bAutoWidth: false,
+        deferRender:true,
+        bProcessing: true,
+        stateSave:true,
+        iDisplayLength: 10,
+        ajax:{
+            url:baseurl+'/procesos/cotizacion/getVersiones',
+            type:'GET',
+            data:{cotizacion:cotizacion}
+        },
+        columns:[
+          {data:'CCVERSION'},
+          {data:'CCFECDOC'},
+          {data:'CCNOMBRE'},
+          {data:'CCIMPORTEVTA'},
+          {data:'usuario'},
+          {data:'CCFECSYS'},
+        ]
+    });
+}
 loadData(periodo_elegido);
 
 $(document).on('change','#periodo',function(){
@@ -55,8 +81,6 @@ $(document).on('change','#periodo',function(){
 $(document).on('click','.btn-nuevo',function(){
   var version = $(this).data('ccversion')
   var numero = $(this).data('ccnumdoc')
-  console.log(version)
-  console.log(numero)
   $.ajax({
     url: baseurl + '/procesos/cotizacion/edit',
     type: 'GET',
@@ -71,13 +95,18 @@ $(document).on('click','.btn-nuevo',function(){
     }
   })
 })
+$(document).on('click','.btn-get',function(){
+  loadVersions($(this).data('ccnumdoc'))
+  $('#Modal').modal('show')
+})
+
 $(document).on('submit','#formCotizacion',function(e){
   e.preventDefault()
   var form = $(this)
   var detalle = []
   $('#divDetailCot').find('tbody').each(function() {
     item = $(this)
-    producto_cliente = item.parents('#detailProduct').find('input[name=idproducto]').val()
+    producto_cliente = item.parents('.detailProduct').find('input[name=idproducto]').val()
 
     item.find('tr').each(function() {
       tr = $(this)

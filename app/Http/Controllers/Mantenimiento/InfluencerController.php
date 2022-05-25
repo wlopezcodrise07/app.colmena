@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Influencer;
 use App\Models\CategoriaRedSocial;
 use App\Models\Accion;
+use App\Models\RedSocial;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
@@ -93,7 +94,7 @@ public function store(Request $request)
       ")->rightJoin('acciones',function($join){
         $join->on('acciones.codigo','=','influencers.influencer');
       })->where('acciones.estado',1)->where('acciones.codigo',$request->id)->first();
-      $metricas_form = DB::table("metricas_redes_sociales")->get();
+      $metricas_form = RedSocial::where('estado',1)->get();
 
       $data = [
         'metricas_influencer' => $metricas,
@@ -107,10 +108,21 @@ public function store(Request $request)
   public function storeMetrica(Request $request)
   {
     try {
+      $user = Auth::user();
 
       $data = [
-        "metricas" => $request->metricasArray
+        "metricas" => $request->metricasArray,
+        "usuario" => $user->nombre.' '.$user->apepat.' '.$user->apemat,
       ];
+      $influencer = Influencer::where('influencer',$request->influencer)->first();
+      $data_influencer = [
+        'influencer' => $influencer->influencer,
+        'metricas' => $influencer->metricas,
+        'usuario' => $influencer->usuario,
+        'fecha' => $influencer->updated_at
+      ];
+      DB::table('historial_influencer_metricas')->insert($data_influencer);
+
       Influencer::where('influencer',$request->influencer)->update($data);
 
       return [

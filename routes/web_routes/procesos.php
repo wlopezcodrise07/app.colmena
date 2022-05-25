@@ -11,6 +11,8 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('cotizacion/mantenimiento','CotizacionController@mantenimiento')->name('mantenimiento');
     Route::get('cotizacion/edit','CotizacionController@edit')->name('edit');
 		Route::post('cotizacion/createVersion','CotizacionController@createVersion')->name('createVersion');
+		Route::get('cotizacion/getVersiones','CotizacionController@getVersiones')->name('getVersiones');
+		Route::get('cotizacion/getMetrica','CotizacionController@getMetrica')->name('getMetrica');
 	});
 
 	Route::prefix('procesos')

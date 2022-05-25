@@ -176,11 +176,21 @@ $(document).on('change','#tipoAccionSeleccionada',function(){
     type: "GET",
     data: {valor},
     beforeSend:function(){
-      $('#divAccionCont').html('<center><img  src="'+asset+'/img/loader.gif'+'"></center>')
+      $('#divAccionCont').html('<center><img  src="'+asset+'/img/loader.gif'+'" width="60%"></center>')
     },
     success:function(data){
     if ($('#tipoAccion').val()==1) {
       $('#divAccionCont').html(`
+        <div class="row">
+          <div class="col-md-12">
+            <div class="float-end">
+              <input type="hidden" name="" value="${data}">
+              <button class="btn btn-sm  btn-outline-info btnMetricasInfluencer"  type="button">
+                <i class="fas fa-tachometer-alt"></i> &nbsp;Metricas
+              </button>
+            </div>
+          </div>
+        </div><br>
         <table class='table table-hover' style="width:100%;font-size:10pt">
           <thead>
             <tr>
@@ -339,6 +349,9 @@ $(document).on('click','#btnDetail',function(e){
         <td width="10%">${item.precio}</td>
         <td style="display:none">${item.red_social.replace(" ","_").toLowerCase()}</td>
         <td style="display:none">${item.descripcion.replace(" ","_").toLowerCase()}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm btn-eliminar-detalle" name="button"><i class="fa fa-trash"></i></button>
+        </td>
 
       </tr>
       `)
@@ -404,13 +417,16 @@ $('#divTotales').hover(function(){
   $(document).on('change','#CCTIPCAM',function(){
      sumarPrecios()
   })
+  $(document).on('click','.btn-eliminar-detalle',function(){
+    $(this).parents('tr').remove()
+  })
   $(document).on('submit','#formCotizacion',function(e){
     e.preventDefault()
     var form = $(this)
     var detalle = []
     $('#divDetailCot').find('tbody').each(function() {
       item = $(this)
-      producto_cliente = item.parents('#detailProduct').find('input[name=idproducto]').val()
+      producto_cliente = item.parents('.detailProduct').find('input[name=idproducto]').val()
 
       item.find('tr').each(function() {
         tr = $(this)
@@ -464,3 +480,18 @@ $('#divTotales').hover(function(){
       }
     })
   })
+
+$(document).on('click','.btnMetricasInfluencer',function(){
+  $.ajax({
+    url: baseurl + '/procesos/cotizacion/getMetrica',
+    type: 'get',
+    data: {influencer:$('#tipoAccionSeleccionada').val()},
+    beforeSend: function(){
+      $('#divMetricas').html('<center><img  src="'+asset+'/img/loader.gif'+'"></center>')
+    },
+    success: function(data){
+      $('#MetricasInfluencerModal').modal('show')
+      $('#divMetricas').html(data)
+    }
+  })
+})

@@ -78,7 +78,7 @@ $(document).on('submit','#formCotizacion',function(e){
   var detalle = []
   $('#divDetailCot').find('tbody').each(function() {
     item = $(this)
-    producto_cliente = item.parents('#detailProduct').find('input[name=idproducto]').val()
+    producto_cliente = item.parents('.detailProduct').find('input[name=idproducto]').val()
 
     item.find('tr').each(function() {
       tr = $(this)

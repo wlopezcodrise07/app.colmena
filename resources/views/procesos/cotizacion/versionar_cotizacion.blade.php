@@ -5,6 +5,11 @@
 @section('js'){{$js}}@endsection
 
 @section('content')
+<style media="screen">
+  input,select{
+    font-size: 9pt;
+  }
+</style>
 <main>
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container-xl px-4">
@@ -70,38 +75,30 @@
     </div>
 
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-xl modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
+                <h5 class="modal-title" id="modalTitle">Versiones</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="formMantto">
               <div class="modal-body">
                 <div class="row ">
-                    @csrf
-                    <div class="row">
-                      <div class="col-md-12">
-                        <label for="">Descripción</label>
-                        <input type="hidden" class="form-control" name="id" value="">
-                        <input type="text" class="form-control" name="descripcion" value="" max="100" required>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <label for="">Estado</label>
-                        <select class="form-control" name="estado">
-                          <option value="1">Activado</option>
-                          <option value="0">Desactivado</option>
-                        </select>
-                      </div>
-                    </div>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="submit">Guardar</button>
-              </div>
-          </div>
-            </form>
+                  <div class="col-md-12 table-responsive">
+                    <table class="table" id="tblVersions">
+                      <thead>
+                        <tr>
+                          <th>Versión</th>
+                          <th>Fecha</th>
+                          <th>Cliente</th>
+                          <th>Importe Total</th>
+                          <th>Cotizado por</th>
+                          <th>Fec.Creación</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+            </div>
       </div>
     </div>
   </div>
